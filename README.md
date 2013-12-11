@@ -1,4 +1,4 @@
 Talks
 =====
 
-Repository for code given at all my talks
+Repository for code shown at all my talks
