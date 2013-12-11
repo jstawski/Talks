@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+    <script src="~/Scripts/knockout-3.0.0.js"></script>
+    <script type="text/javascript">
+        function AppViewModel() {
+            this.firstName = ko.observable("Bert");
+            this.lastName = ko.observable("Bertington");
+            this.changeName = function () {
+                this.firstName("Bart");
+                this.lastName("Simpson");
+            };
+            this.save = function () {
+                alert(this.firstName() + ' ' + this.lastName());
+            };
+        }
+
+        // Activates knockout.js
+        ko.applyBindings(new AppViewModel());
+    </script>
+}
+<h2>Index</h2>
+
+<p>First name: <input data-bind="value: firstName" /></p>
+<p>Last name: <input data-bind="value: lastName" /></p>
+
+<button data-bind="click: changeName">Change my Name</button>
+<button data-bind="click: save">Save</button>
