@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="page-header">
+    <h1>Vehicles</h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div id="container">
+            <div class="table-responsive" style="display: none;" data-bind="visible: !isEmpty()">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>ID</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>VIN</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: vehicles">
+                        <tr>
+                            <td class="nowrap">
+                                <button type="button" class="btn btn-info btn-sm" data-bind="click: $root.showDetails">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </button>
+                            </td>
+                            <td data-bind="text: id"></td>
+                            <td data-bind="text: make"></td>
+                            <td data-bind="text: model"></td>
+                            <td data-bind="text: vin"></td>
+                            <td data-bind="text: status"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" class="text-right">Total Vehicles: <span data-bind="text: vehicleCount"></span></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div id="vehicleDetails" class="modal fade" data-bind="modal: vehicleDetails">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <span>Vehicle <span data-bind="text: id"></span> details</span>
+                            <button type="button" class="close" data-bind="click: $root.hideDetails">&times;</button>
+                        </div>
+
+                        <div class="modal-body form-horizontal">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5">Make</label>
+                                        <span class="form-control-static col-md-7" data-bind="text: make, visible: !canEdit()"></span>
+                                        <input type="text" class="form-control col-md-7" data-bind="value: make, visible: canEdit" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5">Model</label>
+                                        <span class="form-control-static col-md-7" data-bind="text: model, visible: !canEdit()"></span>
+                                        <input type="text" class="form-control col-md-7" data-bind="value: model, visible: canEdit" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5">VIN</label>
+                                        <span class="form-control-static col-md-7" data-bind="text: vin, visible: !canEdit()"></span>
+                                        <input type="text" class="form-control col-md-7" data-bind="value: vin, visible: canEdit" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5">Status</label>
+                                        <input type="text" class="form-control col-md-7" data-bind="value: status" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="pull-left">
+                                <button type="button" class="btn btn-primary" data-bind="click: $root.saveDetails">Save</button>
+                                <button type="button" class="btn btn-default" data-bind="click: $root.hideDetails">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+        require(["/Scripts/config.js"], function () {
+            require.config({ baseUrl: "/Scripts/app" });
+            require(["main"]);
+        });
+    </script>
+}
